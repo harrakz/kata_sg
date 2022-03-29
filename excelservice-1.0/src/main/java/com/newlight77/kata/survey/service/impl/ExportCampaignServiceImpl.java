@@ -176,12 +176,6 @@ public class ExportCampaignServiceImpl implements  ExportCampaignService{
       resultFile.deleteOnExit();
     } catch(Exception ex) {
         throw new RuntimeException("Errorr while trying to send email", ex);
-    } finally {
-      try {
-        workbook.close();
-      } catch(Exception e) {
-        // CANT HAPPEN
-      }
     }
   }
 
