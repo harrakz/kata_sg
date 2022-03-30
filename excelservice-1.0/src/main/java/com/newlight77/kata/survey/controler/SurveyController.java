@@ -16,14 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.newlight77.kata.survey.model.Survey;
-import com.newlight77.kata.survey.service.ExportCampaignService;
+import com.newlight77.kata.survey.service.SurveyService;
 
 @RestController
 @RequestMapping("/api/surveys")
 public class SurveyController {
 	@Autowired
-	private ExportCampaignService exportCampaignService;
-
+	private SurveyService surveyService;
 
 	private static final Logger logger = LoggerFactory.getLogger(SurveyController.class);
 
@@ -33,13 +32,13 @@ public class SurveyController {
 			return ResponseEntity.noContent().build();
 		}
 		try {
-			exportCampaignService.creerSurvey(survey);
+			surveyService.creerSurvey(survey);
 		} catch (Exception e) {
 			throw e;
 
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	
@@ -47,7 +46,7 @@ public class SurveyController {
 
 	@GetMapping(value = "{id}")
 	public Survey getSurvey(@PathVariable String id) {
-		Survey survey = exportCampaignService.getSurvey(id);
+		Survey survey = surveyService.getSurvey(id);
 		if (Objects.isNull(survey)) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "The survey with " + id + " is not found");
 		}

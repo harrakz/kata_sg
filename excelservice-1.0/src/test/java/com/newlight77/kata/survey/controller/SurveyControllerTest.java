@@ -17,6 +17,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -28,7 +29,7 @@ import com.newlight77.kata.survey.controler.SurveyController;
 import com.newlight77.kata.survey.model.Address;
 import com.newlight77.kata.survey.model.Question;
 import com.newlight77.kata.survey.model.Survey;
-import com.newlight77.kata.survey.service.ExportCampaignService;
+import com.newlight77.kata.survey.service.SurveyService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SurveyControllerTest {
@@ -39,7 +40,7 @@ public class SurveyControllerTest {
 	private SurveyController surveyController;
 
 	@Mock
-	private ExportCampaignService exportCampaignService;
+	private SurveyService exportCampaignService;
 
 	private static ObjectMapper mapper = new ObjectMapper();
 
@@ -92,7 +93,7 @@ public class SurveyControllerTest {
 		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/surveys")
 			      .contentType(MediaType.APPLICATION_JSON_VALUE).content(json)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
-		   assertEquals(200, status);
+		   assertEquals(201, status);
 
 	}
 

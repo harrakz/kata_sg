@@ -1,6 +1,6 @@
 package com.newlight77.kata.survey.service;
 
-import com.newlight77.kata.survey.client.CampaignClient;
+import com.newlight77.kata.survey.client.impl.CampaignClientImpl;
 import com.newlight77.kata.survey.model.Campaign;
 import com.newlight77.kata.survey.model.Survey;
 import com.newlight77.kata.survey.service.impl.ExportCampaignServiceImpl;
@@ -21,7 +21,7 @@ public class ExportCampaignServiceImplTest {
     private ExportCampaignServiceImpl service;
 
     @Mock
-    private CampaignClient campaignClientMock;
+    private CampaignClientImpl campaignClientMock;
 
     @Mock
     private MailServiceImpl mailServiceMock;
@@ -36,7 +36,7 @@ public class ExportCampaignServiceImplTest {
     public void init() {
         MockitoAnnotations.initMocks(this);
 
-        service = new ExportCampaignServiceImpl(campaignClientMock, mailServiceMock);
+        service = new ExportCampaignServiceImpl(mailServiceMock);
         service = Mockito.spy(service);
     }
 
